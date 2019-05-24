@@ -1,0 +1,17 @@
+#11.most water
+#two pointer
+def ans(l):
+    i = 0
+    j = len(l)-1
+    w = (j-i)*min(l[i],l[j])
+    while i<j:
+        w_ = (j-i)*min(l[i],l[j])
+        if w_>w:
+            w = w_
+        if l[i]>l[j]:
+            j -= 1
+        else:
+            i += 1
+    return w
+
+ans([1,8,6,2,5,4,8,3,7])
