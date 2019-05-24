@@ -1,3 +1,5 @@
+#My first solution
+#Examine step=2, if no answer, examine step=1.
 class Solution:
     def romanToInt(self, s: str) -> int:
         def to_int(s):
@@ -27,3 +29,20 @@ class Solution:
                 ans += n
                 i += k
         return ans
+
+#Second version:
+#Examine one step each, decide to add or minus
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        nums={'M':1000, 'D':500, 'C':100, 'L':50, 'X':10, 'V':5, 'I':1}
+        i=0
+        ans=0
+        while i<len(s)-1:
+            if nums[s[i]]<nums[s[i+1]]:
+                ans -= nums[s[i]]
+            else:
+                ans += nums[s[i]]
+            i+=1
+        ans += nums[s[-1]]
+        return(ans)
+ #60ms, beat 94.75%.
