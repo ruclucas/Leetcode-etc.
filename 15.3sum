@@ -1,0 +1,83 @@
+#First try
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        def ans_(l,target):
+            a = 0
+            b = len(l)-1
+            ans_ = []
+            while b>a:
+                if l[a]+l[b]==target:
+                    ans_.append([l[a],l[b]])
+                    a += 1
+                    b -= 1
+                elif l[a]+l[b]<target:
+                    a += 1
+                else:
+                    b -= 1
+            return(ans_)
+        i=0
+        j=len(nums)-1
+        ans = []
+        nums.sort()
+        while j>=i+2:
+            a = ans_(nums[i+1:j+1],-nums[i])
+            if len(a)==0:
+                i += 1
+            else:
+                for x in a:
+                    ans.append([nums[i]]+x)
+                i += 1
+        ans = list(set(tuple(s) for s in ans))
+        return(ans)
+ 
+#time limited.
+ 
+#Second try: fixed some certain test cases
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        def ans_(l,target):
+            a = 0
+            b = len(l)-1
+            ans_ = []
+            while b>a:
+                if l[a]+l[b]==target:
+                    ans_.append([l[a],l[b]])
+                    a += 1
+                    b -= 1
+                elif l[a]+l[b]<target:
+                    a += 1
+                else:
+                    b -= 1
+            return(ans_)
+        i=0
+        j=len(nums)-1
+        ans = []
+        if len(nums)<3:
+            return(ans)
+        if nums == [0]*len(nums):
+            return([[0,0,0]])
+        nums.sort()
+        if nums[-1]<0:
+            return(ans)
+        if nums[0]>0:
+            return(ans)
+        while j>=i+2:
+            #if nums[i]>0: break
+            a = ans_(nums[i+1:j+1],-nums[i])
+            if len(a)==0:
+                i += 1
+            else:
+                for x in a:
+                    ans.append([nums[i]]+x)
+                i += 1
+        ans = list(set(tuple(s) for s in ans))
+        return(ans)
+#Beat 37% on time, beat 91% on space.
+ 
+#Third try
+#Notice that we don't need to try if the target is already larger than 0
+#Theoretically cut off half of the efforts.
+
+if nums[i]>0: break
+
+#beat 65% on time, 86% on space.
