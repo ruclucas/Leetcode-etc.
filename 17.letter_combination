@@ -1,0 +1,30 @@
+#First try
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        d = {'2':['a','b','c'],'3':['d','e','f'],'4':['g','h','i'],'5':['j','k','l'],'6':['m','n','o'],'7':['p','q','r','s'],'8':['t','u','v'],'9':['w','x','y','z']}
+        ans = []
+        i = 0
+        for x in digits:
+            if i == 0:
+                ans = d[x]
+            else:
+                ans = [(a+b) for a in ans for b in d[x]]
+            i += 1
+        return(ans)
+#beat 17% on time, 72% on space.
+
+#Second try
+#Use backtrack
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        d = {'2':['a','b','c'],'3':['d','e','f'],'4':['g','h','i'],'5':['j','k','l'],'6':['m','n','o'],'7':['p','q','r','s'],'8':['t','u','v'],'9':['w','x','y','z']}
+        def backtrack(c,digits):
+            if len(digits)==0:
+                ans.append(c)
+            else:
+                for s in d[digits[0]]:
+                    backtrack(c+s,digits[1:])
+        ans = []
+        if digits:
+            backtrack('',digits)
+        return ans
