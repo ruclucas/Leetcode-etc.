@@ -1,0 +1,29 @@
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        def to_int(s):
+            if s=='M':return(1,1000)
+            if s=='CM':return(2,900)
+            if s=='D':return(1,500)
+            if s=='CD':return(2,400)
+            if s=='C':return(1,100)
+            if s=='XC':return(2,90)
+            if s=='L':return(1,50)
+            if s=='XL':return(2,40)
+            if s=='X':return(1,10)
+            if s=='IX':return(2,9)
+            if s=='V':return(1,5)
+            if s=='IV':return(2,4)
+            if s=='I':return(1,1)
+            else: return(0,0)
+        i=0
+        ans=0
+        while i<len(s):
+            k,n=to_int(s[i:i+2])
+            if k==0:
+                k,n=to_int(s[i:i+1])
+                ans += n
+                i += 1
+            else:
+                ans += n
+                i += k
+        return ans
